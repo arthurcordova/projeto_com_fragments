@@ -6,10 +6,9 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.proway.projetofragments.fragments.PrimeiroFragment
 import com.proway.projetofragments.fragments.SegundoFragment
+import com.proway.projetofragments.fragments.TerceiroFragment
 
 class MainActivity : AppCompatActivity() {
-
-    private var tipoFragment = TipoFragment.PRIMEIRO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,16 +16,21 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.buttonFrag1).apply {
             setOnClickListener {
-                if (tipoFragment == TipoFragment.PRIMEIRO) {
-                    replaceFrag(PrimeiroFragment())
-                    tipoFragment = TipoFragment.SEGUNDO
-                } else if (tipoFragment == TipoFragment.SEGUNDO) {
-                    replaceFrag(SegundoFragment())
-                    tipoFragment = TipoFragment.PRIMEIRO
-                }
+                replaceFrag(PrimeiroFragment())
             }
         }
 
+        findViewById<Button>(R.id.buttonFrag2).apply {
+            setOnClickListener {
+                replaceFrag(SegundoFragment())
+            }
+        }
+
+        findViewById<Button>(R.id.buttonFrag3).apply {
+            setOnClickListener {
+                replaceFrag(TerceiroFragment())
+            }
+        }
 
     }
 
@@ -35,9 +39,4 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.container, fragment)
             .commitNow()
     }
-}
-
-enum class TipoFragment {
-    PRIMEIRO,
-    SEGUNDO
 }
