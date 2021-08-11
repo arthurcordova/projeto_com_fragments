@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_weight="1"
-            android:text="Produtos" />
+            android:text="Produtos"
+            android:textSize="12sp" />
 
 
         <Button
@@ -26,7 +27,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_weight="1"
-            android:text="Carros" />
+            android:text="Carros"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/buttonDialogFrag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:text="Dialog"
+            android:textSize="12sp" />
 
     </LinearLayout>
 

@@ -28,6 +28,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        findViewById<Button>(R.id.buttonDialogFrag).apply {
+            setOnClickListener {
+                DialogFragmentApp().show(supportFragmentManager, "")
+            }
+        }
+
     }
 
     private fun replaceFrag(fragment: Fragment) {
