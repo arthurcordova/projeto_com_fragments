@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.buttonFrag3).apply {
             setOnClickListener {
-                replaceFrag(TerceiroFragment())
+                replaceFrag(TerceiroFragment.newInstance(false))
             }
         }
 

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.proway.projetofragments.R
 
-class PrimeiroFragment : Fragment() {
+class PrimeiroFragment() : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
