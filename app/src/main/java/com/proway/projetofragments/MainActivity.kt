@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.proway.projetofragments.fragments.PrimeiroFragment
 import com.proway.projetofragments.fragments.SegundoFragment
 import com.proway.projetofragments.fragments.TerceiroFragment
+import com.proway.projetofragments.fragments.TipoLista
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,19 +17,14 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.buttonFrag1).apply {
             setOnClickListener {
-                replaceFrag(PrimeiroFragment())
+                replaceFrag(TerceiroFragment.newInstance(TipoLista.PRODUTOS))
             }
         }
 
-        findViewById<Button>(R.id.buttonFrag2).apply {
-            setOnClickListener {
-                replaceFrag(SegundoFragment())
-            }
-        }
 
         findViewById<Button>(R.id.buttonFrag3).apply {
             setOnClickListener {
-                replaceFrag(TerceiroFragment.newInstance(false))
+                replaceFrag(TerceiroFragment.newInstance(TipoLista.CARROS))
             }
         }
 

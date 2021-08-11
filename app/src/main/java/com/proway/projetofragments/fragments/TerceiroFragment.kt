@@ -9,18 +9,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.proway.projetofragments.R
-import com.proway.projetofragments.adapter.ProductAdapter
+import com.proway.projetofragments.adapter.GenericAdapter
+import com.proway.projetofragments.model.Car
 import com.proway.projetofragments.model.Product
 
 class TerceiroFragment() : Fragment() {
 
     lateinit var recyclerView: RecyclerView
 
+    var parametroTipoLista: Int = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        arguments?.getBoolean("chave_parametro")?.let {
-//            isMyBoolean = it
+        arguments?.getInt("tipo_lista")?.let {
+            parametroTipoLista = it
         }
     }
 
@@ -34,30 +36,47 @@ class TerceiroFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val listOf = mutableListOf<Product>(
-//            Product(1, "Cerveja"),
-//            Product(2, "Leite"),
-//            Product(3, "Carne"),
-//            Product(4, "Fralda"),
-//            Product(5, "Pizza"),
-//            Product(6, "Água"),
-//        )
-//
-//        recyclerView = view.findViewById(R.id.productsRecyclerView)
-//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-//        recyclerView.adapter = ProductAdapter(listOf)
+        var listOf = mutableListOf<Any>()
+        if (parametroTipoLista == TipoLista.PRODUTOS.id) {
+            listOf = mutableListOf(
+                Product(1, "Cerveja"),
+                Product(2, "Leite"),
+                Product(3, "Carne"),
+                Product(4, "Fralda"),
+                Product(5, "Pizza"),
+                Product(6, "Água"),
+            )
+        } else if (parametroTipoLista == TipoLista.CARROS.id) {
+            listOf = mutableListOf(
+                Car("Gol", 2020),
+                Car("Celta", 2020),
+                Car("Marajó", 2020),
+                Car("Opala", 2020),
+                Car("Monza", 2020),
+                Car("Onix", 2020),
+                Car("Fusca", 2020),
+            )
+        }
+        recyclerView = view.findViewById(R.id.genericRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = GenericAdapter(listOf)
+
 
     }
 
     companion object {
 
-        fun newInstance(parametro: Boolean): TerceiroFragment {
+        fun newInstance(tipoLista: TipoLista): TerceiroFragment {
             return TerceiroFragment().apply {
                 arguments = Bundle().apply {
-                    putBoolean("chave_parametro", parametro)
+                    putInt("tipo_lista", tipoLista.id)
                 }
             }
         }
-
     }
+}
+
+enum class TipoLista(val id: Int) {
+    PRODUTOS(1),
+    CARROS(2)
 }
