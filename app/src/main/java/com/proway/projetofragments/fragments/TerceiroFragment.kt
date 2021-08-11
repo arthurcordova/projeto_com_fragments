@@ -19,6 +19,12 @@ class TerceiroFragment() : Fragment() {
 
     var parametroTipoLista: Int = 0
 
+    /**
+     * Buscamos pelo parametro que foi enviado pelo newInstance()
+     *
+     * onAttach é o primeiro método chamado automaticamente pelo Fragment
+     *
+     */
     override fun onAttach(context: Context) {
         super.onAttach(context)
         arguments?.getInt("tipo_lista")?.let {
@@ -26,6 +32,10 @@ class TerceiroFragment() : Fragment() {
         }
     }
 
+    /**
+     * Vincula o Fragment com um layout xml.
+     * Obrigatorio implementar este método para ter uma view
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,9 +43,20 @@ class TerceiroFragment() : Fragment() {
         return inflater.inflate(R.layout.fragment_terceiro, container, false)
     }
 
+    /**
+     * Método executado pelo fragment após ter criado a view
+     *
+     * @param view View -> Usamos a view que recebemos por parametro para
+     * manipular os componentes que add no xml.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /**
+         * Criamos a lista desta maneira pq usamos generics.
+         * Declaramos ela como Any, mas na sequencia modificamos a instance dela
+         * pela lista que gostariamos.
+         */
         var listOf = mutableListOf<Any>()
         if (parametroTipoLista == TipoLista.PRODUTOS.id) {
             listOf = mutableListOf(
@@ -59,15 +80,31 @@ class TerceiroFragment() : Fragment() {
         }
         recyclerView = view.findViewById(R.id.genericRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = GenericAdapter(listOf)
+        /**
+         * No construtor do Adapter recebemos um MutableList<T>.
+         * Então podemos enviar uma de qualquer objeto para ele, claro que
+         * neste caso tratamos somente para as classes Car e Product.
+         */
+        recyclerView.adapter = GenericAdapter(listOf, if (parametroTipoLista == TipoLista.PRODUTOS.id) TipoLista.PRODUTOS else TipoLista.CARROS)
 
 
     }
 
     companion object {
 
+        /**
+         * Criado esta funçao para retornar uma instancia do TerceiroFragment.
+         * Fazemos isso pq é uma boa pratica deixa o Fragment com um construtor
+         * limpo. OBS-> Criamos dentor do companion para deixar static
+         *
+         * @param tipoLista TipoLista - Parametro que irá definir a exibição de lista CARROS/PRODUTOS
+         *
+         */
         fun newInstance(tipoLista: TipoLista): TerceiroFragment {
             return TerceiroFragment().apply {
+                /**
+                 * Buscamos os arguments do Fragment e add o tipo da lista por parametro
+                 */
                 arguments = Bundle().apply {
                     putInt("tipo_lista", tipoLista.id)
                 }
@@ -76,6 +113,9 @@ class TerceiroFragment() : Fragment() {
     }
 }
 
+/**
+ * Enum criado para identificar o tipo da lista CARRO/PRODUTO
+ */
 enum class TipoLista(val id: Int) {
     PRODUTOS(1),
     CARROS(2)
