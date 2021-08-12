@@ -69,13 +69,13 @@ class TerceiroFragment() : Fragment() {
             )
         } else if (parametroTipoLista == TipoLista.CARROS.id) {
             listOf = mutableListOf(
-                Car("Gol", 2020),
-                Car("Celta", 2020),
-                Car("Marajó", 2020),
-                Car("Opala", 2020),
-                Car("Monza", 2020),
-                Car("Onix", 2020),
-                Car("Fusca", 2020),
+                Car("Gol", 2020, "Gasolina"),
+                Car("Celta", 2020, "Diesel"),
+                Car("Marajó", 2020, "Eletrico"),
+                Car("Opala", 2020, "Gasolina"),
+                Car("Monza", 2020, "Gasolina"),
+                Car("Onix", 2020, "Diesel"),
+                Car("Fusca", 2020, "Gasolina"),
             )
         }
         recyclerView = view.findViewById(R.id.genericRecyclerView)
@@ -85,7 +85,10 @@ class TerceiroFragment() : Fragment() {
          * Então podemos enviar uma de qualquer objeto para ele, claro que
          * neste caso tratamos somente para as classes Car e Product.
          */
-        recyclerView.adapter = GenericAdapter(listOf, if (parametroTipoLista == TipoLista.PRODUTOS.id) TipoLista.PRODUTOS else TipoLista.CARROS)
+        recyclerView.adapter = GenericAdapter(
+            listOf,
+            if (parametroTipoLista == TipoLista.PRODUTOS.id) TipoLista.PRODUTOS else TipoLista.CARROS
+        )
 
 
     }

@@ -20,7 +20,8 @@ class GenericAdapter<T>(private val listOf: MutableList<T>, private val type: Ti
     RecyclerView.Adapter<GenericViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericViewHolder {
-        val viewProduct = LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
+        val viewProduct =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
         val viewCar = LayoutInflater.from(parent.context).inflate(R.layout.item_car, parent, false)
         val finalView = if (type == TipoLista.PRODUTOS) viewProduct else viewCar
         return GenericViewHolder(finalView)
@@ -58,6 +59,10 @@ class GenericViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             is Car -> {
                 titleTextView.text = model.modelo
                 subTitleTextView.text = model.ano.toString()
+
+                itemView.findViewById<TextView>(R.id.combustivelTextView).apply {
+                    text = model.combustivel
+                }
             }
         }
 
