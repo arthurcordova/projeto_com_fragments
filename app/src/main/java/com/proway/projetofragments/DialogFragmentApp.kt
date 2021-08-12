@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
  */
 class DialogFragmentApp : DialogFragment() {
 
+
     /**
      * Sobrescrevemos este méto para customizar o dialog
      */

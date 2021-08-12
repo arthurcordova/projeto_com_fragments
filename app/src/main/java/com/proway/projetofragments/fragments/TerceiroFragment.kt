@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.edit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.proway.projetofragments.R
@@ -89,8 +90,6 @@ class TerceiroFragment() : Fragment() {
             listOf,
             if (parametroTipoLista == TipoLista.PRODUTOS.id) TipoLista.PRODUTOS else TipoLista.CARROS
         )
-
-
     }
 
     companion object {
